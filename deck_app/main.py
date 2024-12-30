@@ -13,17 +13,22 @@ class DeckOfManyThingsApp:
         """Initialize the application and its components."""
         self.root = root
         self.root.title("Deck of Many Things")
-        self.root.geometry("1024x768")  # Set a fixed size for the window
-        self.root.resizable(False, False)  # Disable resizing
+        self.root.attributes('-fullscreen', True)  # Set fullscreen mode
+        self.root.resizable(True, True)  # Allow resizing if needed
 
-        self.deck = []
-        self.deck_saved = False  # Track if the deck is ready for drawing
-        self.decks_folder = "decks"
-        self.images_folder = "images"
-        self.sounds_folder = "sounds"
+        # Asset folders
+        self.assets_folder = "assets"
+        self.decks_folder = os.path.join(self.assets_folder, "decks")
+        self.images_folder = os.path.join(self.assets_folder, "images")
+        self.sounds_folder = os.path.join(self.assets_folder, "sounds")
 
         # Ensure required folders exist
         os.makedirs(self.decks_folder, exist_ok=True)
+        os.makedirs(self.images_folder, exist_ok=True)
+        os.makedirs(self.sounds_folder, exist_ok=True)
+
+        self.deck = []
+        self.deck_saved = False  # Track if the deck is ready for drawing
 
         # Initialize pygame for sound
         pygame.mixer.init()
@@ -31,6 +36,9 @@ class DeckOfManyThingsApp:
         # Create the status label at the root level and make it persistent
         self.status_label = tk.Label(self.root, text="", relief=tk.SUNKEN, anchor=tk.W)
         self.status_label.pack(side=tk.BOTTOM, fill=tk.X)
+
+        # Validate assets
+        self.validate_assets()
 
         # Check for an existing deck
         if self.get_last_deck():
@@ -41,6 +49,22 @@ class DeckOfManyThingsApp:
                 self.init_first_menu()
         else:
             self.init_first_menu()
+
+    def validate_assets(self):
+        """Validate that all required assets are present."""
+        required_files = [
+            os.path.join(self.decks_folder, "major_arcana.json"),
+            os.path.join(self.images_folder, "deck_of_many_things.png"),
+            os.path.join(self.sounds_folder, "shuffle.wav"),
+            os.path.join(self.sounds_folder, "spookymagic.mp3")
+        ]
+        missing_files = [f for f in required_files if not os.path.exists(f)]
+        if missing_files:
+            messagebox.showerror(
+                "Missing Assets",
+                f"The following required files are missing:\n" + "\n".join(missing_files)
+            )
+            self.root.quit()
 
     def init_first_menu(self):
         """Initialize the first menu with New Deck and Exit options."""
@@ -78,18 +102,20 @@ class DeckOfManyThingsApp:
             if widget is not self.status_label:  # Avoid destroying the status label
                 widget.destroy()
 
-        canvas = tk.Canvas(self.root, width=400, height=300)
-        canvas.pack()
+        canvas_width = self.root.winfo_screenwidth()
+        canvas_height = self.root.winfo_screenheight()
+        canvas = tk.Canvas(self.root, width=canvas_width, height=canvas_height)
+        canvas.pack(fill=tk.BOTH, expand=True)
 
         back_image_path = os.path.join(self.images_folder, "deck_of_many_things.png")
         try:
-            back_image = Image.open(back_image_path).resize((100, 150))
+            back_image = Image.open(back_image_path).resize((400, 700))
             self.back_photo = ImageTk.PhotoImage(back_image)  # Store reference as a class attribute
         except Exception as e:
             messagebox.showerror("Error", f"Failed to load back image: {e}")
             return
 
-        card = canvas.create_image(200, 150, image=self.back_photo, anchor=tk.CENTER)
+        card = canvas.create_image(canvas_width // 2, canvas_height // 2, image=self.back_photo, anchor=tk.CENTER)
 
         def animate_shuffle():
             for _ in range(10):
@@ -120,8 +146,8 @@ class DeckOfManyThingsApp:
                 self.save_and_exit()
             return
 
-        canvas_width = 1024
-        canvas_height = 768
+        canvas_width = self.root.winfo_width()
+        canvas_height = self.root.winfo_height()
         canvas = tk.Canvas(self.root, width=canvas_width, height=canvas_height)
         canvas.pack()
 
@@ -139,7 +165,7 @@ class DeckOfManyThingsApp:
         center_x = canvas_width // 2
         center_y = canvas_height // 2 + 100
         radius = 250
-        angle_step = 180 // len(self.deck)  # Spread evenly in a semi-circle
+        angle_step = 180 // (len(self.deck) - 1) if len(self.deck) > 1 else 0  # Spread evenly in a semi-circle
 
         for i, card in enumerate(self.deck):
             angle = 180 + i * angle_step  # Rotated semi-circle (90° left)
@@ -165,7 +191,7 @@ class DeckOfManyThingsApp:
 
         try:
             front_image_path = os.path.join(self.images_folder, card["image"].replace("images/", ""))
-            front_image = Image.open(front_image_path).resize((250, 375))
+            front_image = Image.open(front_image_path).resize((400, 700))
             front_photo = ImageTk.PhotoImage(front_image)
 
             self.deck.remove(card)
