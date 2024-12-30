@@ -1,0 +1,28 @@
+{
+    "MajorArcana": [
+        {
+            "name": "The Fool",
+            "theme": "Beginning a journey, naivety, spontaneity.",
+            "effect": "The player is transported to an unknown location, gaining a random magical item but losing one current possession.",
+            "good_consequence": true,
+            "image": "The_Fool.png",
+            "sound": "The_Fool.wav"
+        },
+        {
+            "name": "The Magician",
+            "theme": "Mastery, skill, willpower.",
+            "effect": "The player gains the ability to cast one spell from any class list as if they were a 20th-level caster for the next 24 hours.",
+            "good_consequence": true,
+            "image": "The_Magician.png",
+            "sound": "The_Magician.wav"
+        },
+        {
+            "name": "The High Priestess",
+            "theme": "Mystery, intuition, hidden knowledge.",
+            "effect": "The player receives cryptic guidance in their dreams, revealing a future event or danger.",
+            "good_consequence": true,
+            "image": "The_High_Priestess.png",
+            "sound": "The_High_Priestess.wav"
+        }
+    ]
+}
