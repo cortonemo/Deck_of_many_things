@@ -153,7 +153,7 @@ class DeckOfManyThingsApp:
 
         back_image_path = os.path.join(self.images_folder, "deck_of_many_things.png")
         try:
-            back_image = Image.open(back_image_path).resize((100, 150))
+            back_image = Image.open(back_image_path).resize((100, 175))
             back_photo = ImageTk.PhotoImage(back_image)
         except Exception as e:
             messagebox.showerror("Error", f"Failed to load back image: {e}")
@@ -164,7 +164,7 @@ class DeckOfManyThingsApp:
         # Calculate semi-circle positions
         center_x = canvas_width // 2
         center_y = canvas_height // 2 + 100
-        radius = 250
+        radius = 480
         angle_step = 180 // (len(self.deck) - 1) if len(self.deck) > 1 else 0  # Spread evenly in a semi-circle
 
         for i, card in enumerate(self.deck):
@@ -180,6 +180,9 @@ class DeckOfManyThingsApp:
 
         finish_button = tk.Button(self.root, text="Finish and Exit", command=self.save_and_exit)
         finish_button.pack(pady=10)
+
+        exit_button = tk.Button(self.root, text="Exit Picking Cards", command=self.init_first_menu)
+        exit_button.pack(pady=10)
 
         self.status_label.config(text="Click on a card to reveal it or finish to exit.")
 
