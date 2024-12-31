@@ -1,33 +1,80 @@
-# Deck of Many Things 🃏
+# Deck of Many Things
 
-A Python application to draw, shuffle, and interact with the mystical **Deck of Many Things**, inspired by the legendary Dungeons & Dragons artifact. This app combines card-drawing mechanics, sound effects, and visuals to create an immersive experience for tabletop gamers and enthusiasts.
+## Overview
+The **Deck of Many Things** is a graphical application simulating the iconic item from tabletop role-playing games. This program allows users to interact with a virtual deck, shuffle cards, and reveal their effects in a visually engaging way.
 
----
+## Features
+- **Full-Screen Mode**: The application opens in full-screen for an immersive experience.
+- **Interactive UI**: Users can shuffle the deck, draw cards displayed in a semi-circle, and reveal their details.
+- **Dynamic Layout**:
+  - Cards are positioned in a large semi-circle, adjustable for different screen sizes.
+  - The semi-circle is drawn closer to the bottom of the screen for better visibility.
+- **Exit Options**:
+  - Return to the main menu while picking cards.
+  - Exit the application after finishing.
+- **Custom Card Sizes**:
+  - Back cards: 400x700 pixels.
+  - Revealed cards: 400x700 pixels.
+- **Sound Effects**: Shuffle and special effects sounds enhance the experience.
 
-## Features ✨
-- **Shuffle the Deck**: Randomize the cards to keep the game exciting.
-- **Draw Cards**: Pull one or multiple cards from the deck.
-- **Major Arcana Customization**: Built with a customized 22 Major Arcana design tailored for D&D.
-- **Sound Effects**: Includes shuffle and draw sound effects for an immersive experience.
-- **Visual Display**: Shows the drawn card’s name, theme, and magical effect.
+## Requirements
+- Python 3.8+
+- Required libraries:
+  - `tkinter`
+  - `Pillow` (PIL)
+  - `pygame`
+- Assets folder structure:
+  ```
+  assets/
+    decks/
+      major_arcana.json
+    images/
+      deck_of_many_things.png
+    sounds/
+      shuffle.wav
+      spookymagic.mp3
+  ```
 
----
-
-## Table of Contents 📜
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Project Structure](#project-structure)
-4. [Requirements](#requirements)
-5. [Contributing](#contributing)
-6. [License](#license)
-
----
-
-## Installation 🛠️
-
-To run the app on your local machine, follow these steps:
-
-1. **Clone the Repository**:
+## Installation
+1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/Deck_of_many_things.git
-   cd Deck_of_many_things
+   git clone https://github.com/your-repo/deck-of-many-things.git
+   ```
+2. Install required Python packages:
+   ```bash
+   pip install pygame pillow
+   ```
+3. Ensure the `assets/` folder structure and files are in place.
+
+## Usage
+1. Run the application:
+   ```bash
+   python main.py
+   ```
+2. Follow the on-screen instructions to shuffle and draw cards.
+3. Use the "Exit Picking Cards" button to return to the main menu or "Finish and Exit" to close the application.
+
+## File Structure
+- **main.py**: The core application logic.
+- **assets/**: Contains the decks, images, and sounds.
+  - `decks/`: JSON files with card definitions.
+  - `images/`: Images for the card backs and fronts.
+  - `sounds/`: Audio files for sound effects.
+
+## Customization
+- **Card Layout**:
+  - Adjust the semi-circle radius or position in `init_draw_all_ui`.
+  - Change card sizes in the `shuffle_deck` and `reveal_card` methods.
+- **Assets**:
+  - Replace images in the `images/` folder to customize card visuals.
+  - Update sound files in the `sounds/` folder for different effects.
+
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Contributing
+Contributions are welcome! Please fork the repository and create a pull request for any enhancements or bug fixes.
+
+## Acknowledgments
+- Inspired by the *Deck of Many Things* from Dungeons & Dragons.
+- Special thanks to open-source contributors for libraries and tools used in this project.

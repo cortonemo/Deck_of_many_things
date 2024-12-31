@@ -1,10 +1,22 @@
 Remaining Cards:
-- The Empress
-- Death
-- Justice
+- The Wheel of Fortune
 - The High Priestess
-- Strength
-- The Devil
-- The Hanged Man
-- The Magician
+- Judgment
+- The Sun
+- The Chariot
+- The World
 - The Hierophant
+- The Devil
+- The Hermit
+- The Lovers
+- Justice
+- Death
+- The Emperor
+- The Moon
+- The Hanged Man
+- The Empress
+- Temperance
+- The Star
+- The Magician
+- The Tower
+- The Fool
