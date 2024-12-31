@@ -28,20 +28,31 @@ The **Deck of Many Things** is a graphical application simulating the iconic ite
   - `pygame`
 - Assets folder structure:
   ```
-  assets/
-    decks/
-      major_arcana.json
-    images/
-      cards/
-        card_back.png
-        card_fronts/
-          The_Fool.png
-          The_Magician.png
-      ui/
-        deck_of_many_things.png
-    sounds/
-      shuffle.wav
-      reveal_effect.mp3
+  deck_app/
+    assets/
+      decks/
+        major_arcana.json
+        counter_label.txt
+        drawn_cards_report.txt
+      images/
+        cards/
+          card_back.png
+          card_fronts/
+            The_Fool.png
+            The_Magician.png
+            ...
+      sounds/
+        shuffle.wav
+        draw.mp3
+        spookymagic.mp3
+    static/
+      css/
+        styles.css
+      js/
+        script.js
+    templates/
+      base.html
+      index.html
   ```
 
 ## Installation
@@ -58,19 +69,25 @@ The **Deck of Many Things** is a graphical application simulating the iconic ite
 ## Usage
 1. Run the application:
    ```bash
-   python main.py
+   python deck_app/main.py
    ```
 2. Follow the on-screen instructions to shuffle and draw cards.
 3. Use the "Exit Picking Cards" button to return to the main menu or "Finish and Exit" to close the application.
 
 ## File Structure
-- **main.py**: The core application logic.
-- **assets/**: Contains decks, images, and sounds.
-  - `decks/`: JSON files with card definitions.
-  - `images/`: Images for card backs, fronts, and UI elements.
-    - `cards/`: Contains images for card backs and individual card fronts.
-    - `ui/`: Visual assets for the application interface.
-  - `sounds/`: Audio files for shuffle and reveal effects.
+- **deck_app/**: Main application folder.
+  - **assets/**: Contains decks, images, and sounds.
+    - `decks/`: JSON files with card definitions and other textual data.
+    - `images/`: Images for card backs, fronts, and UI elements.
+    - `sounds/`: Audio files for shuffle and reveal effects.
+  - **static/**: Contains static files such as CSS and JavaScript.
+    - `css/`: Styling files.
+    - `js/`: Scripts for frontend functionality.
+  - **templates/**: HTML templates for Flask integration.
+  - `main.py`: The core application logic.
+  - `main_gui.py`: Handles the GUI logic.
+  - `deck_gui.py`: Contains the logic for rendering the card GUI.
+  - `card_logic.py`: Encapsulates card-related logic.
 
 ## Customization
 - **Card Layout**:
