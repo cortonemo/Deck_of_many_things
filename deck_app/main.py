@@ -6,7 +6,8 @@ import os
 from math import sin, cos, radians
 from PIL import Image, ImageTk
 import pygame
-
+from threading import Thread
+from flask_app import app  # Import the Flask app
 
 class DeckOfManyThingsApp:
     def __init__(self, root):
@@ -289,8 +290,16 @@ class DeckOfManyThingsApp:
         """Update the status message in the UI."""
         self.status_label.config(text=message)
 
+    def start_web_gui(self):
+        """Start the Flask app in a separate thread."""
+        from flask_app import app as flask_app  # Import the Flask app explicitly here
+        thread = Thread(target=flask_app.run, kwargs={'host': '127.0.0.1', 'port': 5000, 'debug': False})
+        thread.daemon = True  # Ensure Flask exits when Tkinter exits
+        thread.start()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = DeckOfManyThingsApp(root)
+    app.start_web_gui()  # Start the Flask web GUI
     root.mainloop()

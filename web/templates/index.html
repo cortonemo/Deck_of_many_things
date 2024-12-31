@@ -1,0 +1,104 @@
+// Creating a GUI for a Deck of Many Things in a web application
+// This script uses HTML, CSS, and JavaScript for the interface and logic.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deck of Many Things</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .deck {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card {
+            width: 100px;
+            height: 150px;
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .result {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deck of Many Things</h1>
+        <div class="deck">
+            <!-- Cards will be dynamically generated here -->
+        </div>
+        <div class="results">
+            <h2>Draw Results</h2>
+            <div id="resultLog"></div>
+        </div>
+    </div>
+
+    <script>
+        const deck = [
+            { name: 'The Sun', effect: 'Gain incredible fortune and a magic item.' },
+            { name: 'The Moon', effect: 'You are granted wishes.' },
+            { name: 'The Star', effect: 'Your abilities increase.' },
+            { name: 'The Void', effect: 'Your soul is trapped elsewhere.' },
+            { name: 'The Flames', effect: 'A powerful enemy arises.' },
+            { name: 'The Comet', effect: 'Victory grants great rewards.' },
+            { name: 'The Fates', effect: 'Change a moment in time.' },
+            { name: 'The Rogue', effect: 'Your allies turn against you.' },
+            { name: 'The Knight', effect: 'A loyal companion appears.' },
+            { name: 'The Fool', effect: 'You lose experience points.' },
+        ];
+
+        const deckContainer = document.querySelector('.deck');
+        const resultLog = document.getElementById('resultLog');
+
+        // Generate the card elements
+        deck.forEach((card, index) => {
+            const cardElement = document.createElement('div');
+            cardElement.classList.add('card');
+            cardElement.textContent = card.name;
+            cardElement.onclick = () => drawCard(card);
+            deckContainer.appendChild(cardElement);
+        });
+
+        function drawCard(card) {
+            const resultElement = document.createElement('div');
+            resultElement.classList.add('result');
+            resultElement.textContent = `${card.name}: ${card.effect}`;
+            resultLog.appendChild(resultElement);
+        }
+    </script>
+</body>
+</html>
